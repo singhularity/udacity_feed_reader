@@ -10,9 +10,9 @@
  */
 $(function() {
     /* This is our first test suite - a test suite just contains
-    * a related set of tests. This suite is all about the RSS
-    * feeds definitions, the allFeeds variable in our application.
-    */
+     * a related set of tests. This suite is all about the RSS
+     * feeds definitions, the allFeeds variable in our application.
+     */
     describe('RSS Feeds', function() {
         /* This is our first test - it tests to make sure that the
          * allFeeds variable has been defined and that it is not
@@ -21,7 +21,7 @@ $(function() {
          * allFeeds in app.js to be an empty array and refresh the
          * page?
          */
-        it('are defined', function () {
+        it('are defined', function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
@@ -31,16 +31,16 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-        function testFeedUrl(feed){
+        function testFeedUrl(feed) {
 
-            it('Has url and is not empty!', function () {
+            it('Has url and is not empty!', function() {
                 expect(feed.url).toBeDefined();
                 expect(feed.url).not.toBe(null);
                 expect(feed.url.trim()).not.toBe("");
             });
         }
 
-        for(var feed in allFeeds) {
+        for (var feed in allFeeds) {
             testFeedUrl(allFeeds[feed]);
         }
 
@@ -50,16 +50,16 @@ $(function() {
          * and that the name is not empty.
          */
 
-        function testFeedName(feed){
+        function testFeedName(feed) {
 
-            it('Has name and is not empty!', function () {
+            it('Has name and is not empty!', function() {
                 expect(feed.name).toBeDefined();
                 expect(feed.name).not.toBe(null);
                 expect(feed.name.trim()).not.toBe("");
             });
         }
 
-        for(var feed in allFeeds) {
+        for (var feed in allFeeds) {
             testFeedName(allFeeds[feed]);
         }
     });
@@ -83,7 +83,7 @@ $(function() {
          * should have two expectations: does the menu display when
          * clicked and does it hide when clicked again.
          */
-        it(" is displayed and hidden when clicked.", function(){
+        it(" is displayed and hidden when clicked.", function() {
             $('.menu-icon-link').click();
             expect($('body').attr('class')).toBe('');
             $('.menu-icon-link').click();
@@ -92,12 +92,12 @@ $(function() {
 
     });
     /* Write a new test suite named "Initial Entries" */
-        describe('Initial Entries ', function() {
-            beforeEach(function(done) {
-                loadFeed(0, function(){
-                    done();
-                })
-            });
+    describe('Initial Entries ', function() {
+        beforeEach(function(done) {
+            loadFeed(0, function() {
+                done();
+            })
+        });
 
         /* Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -105,31 +105,31 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test wil require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-            it(" has atleast one entry", function(done) {
-                expect($('.feed .entry').length).toBeGreaterThan(0);
-                done()
-            });
+        it(" has atleast one entry", function(done) {
+            expect($('.feed .entry').length).toBeGreaterThan(0);
+            done();
         });
+    });
 
     /* Write a new test suite named "New Feed Selection"*/
-        describe('New Feed Selection ', function() {
-            var first = $('.feed .entry').first();
-            beforeEach(function(done) {
-                loadFeed(1, function(){
-                    done();
-                })
-            });
+    describe('New Feed Selection ', function() {
+        var first = $('.feed .entry').first();
+        beforeEach(function(done) {
+            loadFeed(1, function() {
+                done();
+            })
+        });
 
 
         /* Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-            it(" changes content of the feeds section.", function(done) {
-                expect($('.feed .entry').first()).not.toBe(first);
-                done();
-            });
+        it(" changes content of the feeds section.", function(done) {
+            expect($('.feed .entry').first()).not.toBe(first);
+            done();
         });
+    });
 
     /**
      * Add additional tests to make sure the feeds have a link and header
@@ -139,17 +139,17 @@ $(function() {
         var first = $('.feed .entry').first();
         var feedNum = 0;
         beforeEach(function(done) {
-            loadFeed(feedNum, function(){
+            loadFeed(feedNum, function() {
                 done();
             })
         });
 
 
         /**
-         * Test to make sure each feed entry has a non empty href and Header
+         * Test to make sure each feed entry has an article, non empty href and Header
          */
         function testStructure() {
-            it(" has valid link and header", function (done) {
+            it(" has valid link and header", function(done) {
                 var feedLinks = $('.feed .entry-link');
                 feedLinks.each(function(feedLink) {
                     expect($(feedLinks[feedLink]).attr('href')).toBeDefined();
@@ -164,7 +164,7 @@ $(function() {
         }
 
         //Iterate through each feed source and load them
-        for(var feed in allFeeds) {
+        for (var feed in allFeeds) {
             testStructure();
         }
     });
@@ -177,17 +177,16 @@ $(function() {
         var first = $('.feed .entry').first();
         var feedNum = 0;
         beforeEach(function(done) {
-            loadFeed(feedNum, function(){
+            loadFeed(feedNum, function() {
                 done();
             })
         });
-
 
         /**
          * Test to make sure each feed entry has a non empty href and Header
          */
         function testShareLink() {
-            it(" has a share link", function (done) {
+            it(" has a share link", function(done) {
                 var feedLinks = $('.feed .entry-link');
                 feedLinks.each(function(feedLink) {
                     expect($(feedLinks[feedLink]).find('article button').length).toBeGreaterThan(0);
@@ -198,7 +197,7 @@ $(function() {
         }
 
         //Iterate through each feed source and load them
-        for(var feed in allFeeds) {
+        for (var feed in allFeeds) {
             testShareLink();
         }
     });
@@ -211,7 +210,7 @@ $(function() {
         var first = $('.feed .entry').first();
         var feedNum = 0;
         beforeEach(function(done) {
-            loadFeed(feedNum, function(){
+            loadFeed(feedNum, function() {
                 done();
             })
         });
@@ -222,7 +221,7 @@ $(function() {
          * (Uses placeholder if not available)
          */
         function testFeedImage() {
-            it(" is present", function (done) {
+            it(" is present", function(done) {
                 var feedLinks = $('.feed .entry-link');
                 feedLinks.each(function(feedLink) {
                     expect($(feedLinks[feedLink]).find('img').length).toBeGreaterThan(0);
@@ -233,7 +232,7 @@ $(function() {
         }
 
         //Iterate through each feed source and load them
-        for(var feed in allFeeds) {
+        for (var feed in allFeeds) {
             testFeedImage();
         }
     });
