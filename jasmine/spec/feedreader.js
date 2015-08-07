@@ -171,7 +171,7 @@ $(function() {
     });
 
     /**
-     * FUTURE FEATURE :: Add additional tests to make sure the feeds have a share link
+     * FUTURE FEATURE :: Add additional tests to make sure the feeds have a share button
      */
 
     describe('Each feed ', function() {
@@ -184,7 +184,7 @@ $(function() {
         });
 
         /**
-         * Test to make sure each feed entry has a non empty href and Header
+         * Test to make sure each feed entry has a share button
          */
         function testShareLink() {
             it(" has a share link", function(done) {
@@ -205,7 +205,7 @@ $(function() {
     });
 
     /**
-     * FUTURE FEATURE :: Add additional tests to make sure the feeds have a share link
+     * FUTURE FEATURE :: Add additional tests to make sure the feeds have an image
      */
 
     describe('Each feed image', function() {
@@ -219,7 +219,7 @@ $(function() {
 
 
         /**
-         * FUTURE FEATURE :: Test to make sure each feed entry has an image associated with the link
+         * FUTURE FEATURE :: Test to make sure each feed entry has an image associated with the feed
          * (Uses placeholder if not available)
          */
         function testFeedImage() {
