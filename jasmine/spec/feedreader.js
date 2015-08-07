@@ -135,37 +135,106 @@ $(function() {
      * Add additional tests to make sure the feeds have a link and header
      */
 
-        describe('Feeds section ', function() {
-            var first = $('.feed .entry').first();
-            var feedNum = 0;
-            beforeEach(function(done) {
-                loadFeed(feedNum, function(){
-                    done();
-                })
-            });
-
-
-            /**
-             * Test to make sure each feed entry has a non empty href and Header
-             */
-            function testStructure() {
-                it(" has valid link and header", function (done) {
-                    var feedLinks = $('.feed .entry-link');
-                    feedLinks.each(function(feedLink) {
-                        expect($(feedLinks[feedLink]).attr('href')).toBeDefined();
-                        expect($(feedLinks[feedLink]).attr('href')).not.toBe("");
-                        expect($(feedLinks[feedLink]).find('article')).toBeDefined();
-                        expect($(feedLinks[feedLink]).find('article h2')).toBeDefined();
-                        expect($(feedLinks[feedLink]).find('article h2').text()).not.toBe("");
-                    });
-                    feedNum += 1;
-                    done();
-                });
-            }
-
-            //Iterate through each feed source and load them
-            for(var feed in allFeeds) {
-                testStructure();
-            }
+    describe('Feeds section ', function() {
+        var first = $('.feed .entry').first();
+        var feedNum = 0;
+        beforeEach(function(done) {
+            loadFeed(feedNum, function(){
+                done();
+            })
         });
+
+
+        /**
+         * Test to make sure each feed entry has a non empty href and Header
+         */
+        function testStructure() {
+            it(" has valid link and header", function (done) {
+                var feedLinks = $('.feed .entry-link');
+                feedLinks.each(function(feedLink) {
+                    expect($(feedLinks[feedLink]).attr('href')).toBeDefined();
+                    expect($(feedLinks[feedLink]).attr('href')).not.toBe("");
+                    expect($(feedLinks[feedLink]).find('article')).toBeDefined();
+                    expect($(feedLinks[feedLink]).find('article h2')).toBeDefined();
+                    expect($(feedLinks[feedLink]).find('article h2').text()).not.toBe("");
+                });
+                feedNum += 1;
+                done();
+            });
+        }
+
+        //Iterate through each feed source and load them
+        for(var feed in allFeeds) {
+            testStructure();
+        }
+    });
+
+    /**
+     * FUTURE FEATURE :: Add additional tests to make sure the feeds have a share link
+     */
+
+    describe('Each feed ', function() {
+        var first = $('.feed .entry').first();
+        var feedNum = 0;
+        beforeEach(function(done) {
+            loadFeed(feedNum, function(){
+                done();
+            })
+        });
+
+
+        /**
+         * Test to make sure each feed entry has a non empty href and Header
+         */
+        function testShareLink() {
+            it(" has a share link", function (done) {
+                var feedLinks = $('.feed .entry-link');
+                feedLinks.each(function(feedLink) {
+                    expect($(feedLinks[feedLink]).find('article button').length).toBeGreaterThan(0);
+                });
+                feedNum += 1;
+                done();
+            });
+        }
+
+        //Iterate through each feed source and load them
+        for(var feed in allFeeds) {
+            testShareLink();
+        }
+    });
+
+    /**
+     * FUTURE FEATURE :: Add additional tests to make sure the feeds have a share link
+     */
+
+    describe('Each feed image', function() {
+        var first = $('.feed .entry').first();
+        var feedNum = 0;
+        beforeEach(function(done) {
+            loadFeed(feedNum, function(){
+                done();
+            })
+        });
+
+
+        /**
+         * FUTURE FEATURE :: Test to make sure each feed entry has an image associated with the link
+         * (Uses placeholder if not available)
+         */
+        function testFeedImage() {
+            it(" is present", function (done) {
+                var feedLinks = $('.feed .entry-link');
+                feedLinks.each(function(feedLink) {
+                    expect($(feedLinks[feedLink]).find('img').length).toBeGreaterThan(0);
+                });
+                feedNum += 1;
+                done();
+            });
+        }
+
+        //Iterate through each feed source and load them
+        for(var feed in allFeeds) {
+            testFeedImage();
+        }
+    });
 }());
