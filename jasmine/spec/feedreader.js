@@ -27,7 +27,7 @@ $(function() {
         });
 
 
-        /* TODO: Write a test that loops through each feed
+        /* Write a test that loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
@@ -45,7 +45,7 @@ $(function() {
         }
 
 
-        /* TODO: Write a test that loops through each feed
+        /* Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
@@ -65,10 +65,10 @@ $(function() {
     });
 
 
-    /* TODO: Write a new test suite named "The menu" */
+    /* Write a new test suite named "The menu" */
     describe('The menu ', function() {
 
-        /* TODO: Write a test that ensures the menu element is
+        /* Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
@@ -78,7 +78,7 @@ $(function() {
             expect($('body').attr('class')).toBe('menu-hidden');
         });
 
-        /* TODO: Write a test that ensures the menu changes
+        /* Write a test that ensures the menu changes
          * visibility when the menu icon is clicked. This test
          * should have two expectations: does the menu display when
          * clicked and does it hide when clicked again.
@@ -91,7 +91,7 @@ $(function() {
         });
 
     });
-    /* TODO: Write a new test suite named "Initial Entries" */
+    /* Write a new test suite named "Initial Entries" */
         describe('Initial Entries ', function() {
             beforeEach(function(done) {
                 loadFeed(0, function(){
@@ -99,7 +99,7 @@ $(function() {
                 })
             });
 
-        /* TODO: Write a test that ensures when the loadFeed
+        /* Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test wil require
@@ -111,7 +111,7 @@ $(function() {
             });
         });
 
-    /* TODO: Write a new test suite named "New Feed Selection"*/
+    /* Write a new test suite named "New Feed Selection"*/
         describe('New Feed Selection ', function() {
             var first = $('.feed .entry').first();
             beforeEach(function(done) {
@@ -121,7 +121,7 @@ $(function() {
             });
 
 
-        /* TODO: Write a test that ensures when a new feed is loaded
+        /* Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
@@ -129,5 +129,43 @@ $(function() {
                 expect($('.feed .entry').first()).not.toBe(first);
                 done();
             });
+        });
+
+    /**
+     * Add additional tests to make sure the feeds have a link and header
+     */
+
+        describe('Feeds section ', function() {
+            var first = $('.feed .entry').first();
+            var feedNum = 0;
+            beforeEach(function(done) {
+                loadFeed(feedNum, function(){
+                    done();
+                })
+            });
+
+
+            /**
+             * Test to make sure each feed entry has a non empty href and Header
+             */
+            function testStructure() {
+                it(" has valid link and header", function (done) {
+                    var feedLinks = $('.feed .entry-link');
+                    feedLinks.each(function(feedLink) {
+                        expect($(feedLinks[feedLink]).attr('href')).toBeDefined();
+                        expect($(feedLinks[feedLink]).attr('href')).not.toBe("");
+                        expect($(feedLinks[feedLink]).find('article')).toBeDefined();
+                        expect($(feedLinks[feedLink]).find('article h2')).toBeDefined();
+                        expect($(feedLinks[feedLink]).find('article h2').text()).not.toBe("");
+                    });
+                    feedNum += 1;
+                    done();
+                });
+            }
+
+            //Iterate through each feed source and load them
+            for(var feed in allFeeds) {
+                testStructure();
+            }
         });
 }());
