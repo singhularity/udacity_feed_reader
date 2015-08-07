@@ -40,7 +40,7 @@ $(function() {
             });
         }
 
-        for(feed in allFeeds) {
+        for(var feed in allFeeds) {
             testFeedUrl(allFeeds[feed]);
         }
 
@@ -59,7 +59,7 @@ $(function() {
             });
         }
 
-        for(feed in allFeeds) {
+        for(var feed in allFeeds) {
             testFeedName(allFeeds[feed]);
         }
     });
@@ -125,8 +125,9 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-            it(" changes content of the feeds section.", function() {
+            it(" changes content of the feeds section.", function(done) {
                 expect($('.feed .entry').first()).not.toBe(first);
+                done();
             });
         });
 }());
