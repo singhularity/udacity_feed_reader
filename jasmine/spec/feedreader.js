@@ -74,7 +74,7 @@ $(function() {
          * hiding/showing of the menu element.
          */
 
-        it("is hidden by default' class", function() {
+        it("is hidden by default.", function() {
             expect($('body').attr('class')).toBe('menu-hidden');
         });
 
@@ -83,7 +83,7 @@ $(function() {
          * should have two expectations: does the menu display when
          * clicked and does it hide when clicked again.
          */
-        it(" is displayed and hidden when clicked", function(){
+        it(" is displayed and hidden when clicked.", function(){
             $('.menu-icon-link').click();
             expect($('body').attr('class')).toBe('');
             $('.menu-icon-link').click();
@@ -92,6 +92,13 @@ $(function() {
 
     });
     /* TODO: Write a new test suite named "Initial Entries" */
+        describe('Initial Entries ', function() {
+            beforeEach(function(done) {
+                setTimeout(function() {
+                    loadFeed(0);
+                    done();
+                }, 500);
+            });
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -99,11 +106,29 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test wil require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+            it(" has atleast one entry", function() {
+                expect($('.feed .entry').length).toBeGreaterThan(0);
+            });
+        });
 
-    /* TODO: Write a new test suite named "New Feed Selection"
+    /* TODO: Write a new test suite named "New Feed Selection"*/
+        describe('New Feed Selection ', function() {
+            var first;
+            beforeEach(function(done) {
+                setTimeout(function() {
+                    $('.feed-list a')[1].click();
+                    done();
+                    first = $('.feed .entry').first();
+                }, 500);
+            });
+
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+            it(" changes content of the feeds section.", function() {
+                expect($('.feed .entry').first()).not.toBe(first);
+            });
+        });
 }());
