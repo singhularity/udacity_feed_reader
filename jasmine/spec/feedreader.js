@@ -150,6 +150,7 @@ $(function() {
          */
         function testStructure() {
             it(" has valid link and header", function(done) {
+                // Gather all the feed entries and make sure the required entities are present
                 var feedLinks = $('.feed .entry-link');
                 feedLinks.each(function(feedLink) {
                     expect($(feedLinks[feedLink]).attr('href')).toBeDefined();
@@ -187,6 +188,7 @@ $(function() {
          */
         function testShareLink() {
             it(" has a share link", function(done) {
+                // Gather all the feed entries and make sure each one has a share button
                 var feedLinks = $('.feed .entry-link');
                 feedLinks.each(function(feedLink) {
                     expect($(feedLinks[feedLink]).find('article button').length).toBeGreaterThan(0);
@@ -222,6 +224,7 @@ $(function() {
          */
         function testFeedImage() {
             it(" is present", function(done) {
+                // Gather all the feed entries and make sure each one has an Image
                 var feedLinks = $('.feed .entry-link');
                 feedLinks.each(function(feedLink) {
                     expect($(feedLinks[feedLink]).find('img').length).toBeGreaterThan(0);
