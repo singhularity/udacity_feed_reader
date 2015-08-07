@@ -94,10 +94,9 @@ $(function() {
     /* TODO: Write a new test suite named "Initial Entries" */
         describe('Initial Entries ', function() {
             beforeEach(function(done) {
-                setTimeout(function() {
-                    loadFeed(0);
+                loadFeed(0, function(){
                     done();
-                }, 500);
+                })
             });
 
         /* TODO: Write a test that ensures when the loadFeed
@@ -106,20 +105,19 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test wil require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-            it(" has atleast one entry", function() {
+            it(" has atleast one entry", function(done) {
                 expect($('.feed .entry').length).toBeGreaterThan(0);
+                done()
             });
         });
 
     /* TODO: Write a new test suite named "New Feed Selection"*/
         describe('New Feed Selection ', function() {
-            var first;
+            var first = $('.feed .entry').first();
             beforeEach(function(done) {
-                setTimeout(function() {
-                    $('.feed-list a')[1].click();
+                loadFeed(1, function(){
                     done();
-                    first = $('.feed .entry').first();
-                }, 500);
+                })
             });
 
 
