@@ -40,9 +40,9 @@ $(function() {
             });
         }
 
-        for (var feed in allFeeds) {
-            testFeedUrl(allFeeds[feed]);
-        }
+        allFeeds.forEach(function(feed) {
+            testFeedUrl(feed);
+        });
 
 
         /* Write a test that loops through each feed
@@ -59,9 +59,9 @@ $(function() {
             });
         }
 
-        for (var feed in allFeeds) {
-            testFeedName(allFeeds[feed]);
-        }
+        allFeeds.forEach(function(feed) {
+            testFeedName(feed);
+        });
     });
 
 
@@ -85,9 +85,9 @@ $(function() {
          */
         it(" is displayed and hidden when clicked.", function() {
             $('.menu-icon-link').click();
-            expect($('body').attr('class')).toBe('');
+            expect($('body').hasClass('menu-hidden')).toBe(false);
             $('.menu-icon-link').click();
-            expect($('body').attr('class')).toBe('menu-hidden');
+            expect($('body').hasClass('menu-hidden')).toBe(true);
         });
 
     });
@@ -96,7 +96,7 @@ $(function() {
         beforeEach(function(done) {
             loadFeed(0, function() {
                 done();
-            })
+            });
         });
 
         /* Write a test that ensures when the loadFeed
@@ -117,7 +117,7 @@ $(function() {
         beforeEach(function(done) {
             loadFeed(1, function() {
                 done();
-            })
+            });
         });
 
 
@@ -141,7 +141,7 @@ $(function() {
         beforeEach(function(done) {
             loadFeed(feedNum, function() {
                 done();
-            })
+            });
         });
 
 
@@ -180,7 +180,7 @@ $(function() {
         beforeEach(function(done) {
             loadFeed(feedNum, function() {
                 done();
-            })
+            });
         });
 
         /**
@@ -214,7 +214,7 @@ $(function() {
         beforeEach(function(done) {
             loadFeed(feedNum, function() {
                 done();
-            })
+            });
         });
 
 
