@@ -1,9 +1,9 @@
+'use strict';
 /* feedreader.js
  *
  * This is the spec file that Jasmine will read and contains
  * all of the tests that will be run against your application.
  */
-
 /* We're placing all of our tests within the $() function,
  * since some of these tests may require DOM elements. We want
  * to ensure they don't run until the DOM is ready.
@@ -113,14 +113,14 @@ $(function() {
 
     /* Write a new test suite named "New Feed Selection"*/
     describe('New Feed Selection ', function() {
-        var first;
+        var firstFeed;
         beforeEach(function(done) {
             // Refactored the before each function to load the first feed and capture the first elements HTML
             // Did this because it seemed like the DOM wasn't rendered when I was trying to capture the first element
             // Not the trick is to load feed 0, capture it's first element and add a callback to loadFeed(1) before...
             // ..... we run the actual test. This way we are sure that we loaded two different feeds to compare.
             loadFeed(0, function() {
-            first = $('.feed .entry').first().html();
+                firstFeed = $('.feed .entry').first().html();
                 loadFeed(1, function() {
                     done();
                 });
@@ -132,8 +132,8 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        it(" changes content of the feeds section.", function(done) {
-            expect($('.feed .entry').first().html()).not.toBe(first);
+        it("changes content of the feeds section.", function(done) {
+            expect($('.feed .entry').first().html()).not.toBe(firstFeed);
             done();
         });
     });
@@ -171,9 +171,9 @@ $(function() {
         }
 
         //Iterate through each feed source and load them
-        for (var feed in allFeeds) {
+        allFeeds.forEach(function() {
             testStructure();
-        }
+        });
     });
 
     /**
@@ -204,9 +204,9 @@ $(function() {
         }
 
         //Iterate through each feed source and load them
-        for (var feed in allFeeds) {
+        allFeeds.forEach(function() {
             testShareLink();
-        }
+        });
     });
 
     /**
@@ -239,8 +239,8 @@ $(function() {
         }
 
         //Iterate through each feed source and load them
-        for (var feed in allFeeds) {
+        allFeeds.forEach(function() {
             testFeedImage();
-        }
+        });
     });
 }());
