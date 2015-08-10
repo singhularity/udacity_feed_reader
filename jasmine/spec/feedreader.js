@@ -115,10 +115,10 @@ $(function() {
     describe('New Feed Selection ', function() {
         var firstFeed;
         beforeEach(function(done) {
-            // Refactored the before each function to load the first feed and capture the first elements HTML
-            // Did this because it seemed like the DOM wasn't rendered when I was trying to capture the first element
-            // Not the trick is to load feed 0, capture it's first element and add a callback to loadFeed(1) before...
-            // ..... we run the actual test. This way we are sure that we loaded two different feeds to compare.
+            /* Refactored the before each function to load the first feed and capture the first elements HTML,
+             did this because it seemed like the DOM wasn't rendered when I was trying to capture the first element.
+             Now, the trick is to load feed 0, capture it's first element and add a callback to loadFeed(1) before...
+             ..... we run the actual test. This way we are sure that we loaded two different feeds to compare. */
             loadFeed(0, function() {
                 firstFeed = $('.feed .entry').first().html();
                 loadFeed(1, function() {
