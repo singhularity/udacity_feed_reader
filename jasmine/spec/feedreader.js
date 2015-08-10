@@ -113,10 +113,17 @@ $(function() {
 
     /* Write a new test suite named "New Feed Selection"*/
     describe('New Feed Selection ', function() {
-        var first = $('.feed .entry').first();
+        var first;
         beforeEach(function(done) {
-            loadFeed(1, function() {
-                done();
+            // Refactored the before each function to load the first feed and capture the first elements HTML
+            // Did this because it seemed like the DOM wasn't rendered when I was trying to capture the first element
+            // Not the trick is to load feed 0, capture it's first element and add a callback to loadFeed(1) before...
+            // ..... we run the actual test. This way we are sure that we loaded two different feeds to compare.
+            loadFeed(0, function() {
+            first = $('.feed .entry').first().html();
+                loadFeed(1, function() {
+                    done();
+                });
             });
         });
 
@@ -126,7 +133,7 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
         it(" changes content of the feeds section.", function(done) {
-            expect($('.feed .entry').first()).not.toBe(first);
+            expect($('.feed .entry').first().html()).not.toBe(first);
             done();
         });
     });
@@ -136,7 +143,6 @@ $(function() {
      */
 
     describe('Feeds section ', function() {
-        var first = $('.feed .entry').first();
         var feedNum = 0;
         beforeEach(function(done) {
             loadFeed(feedNum, function() {
@@ -175,7 +181,6 @@ $(function() {
      */
 
     describe('Each feed ', function() {
-        var first = $('.feed .entry').first();
         var feedNum = 0;
         beforeEach(function(done) {
             loadFeed(feedNum, function() {
@@ -209,7 +214,6 @@ $(function() {
      */
 
     describe('Each feed image', function() {
-        var first = $('.feed .entry').first();
         var feedNum = 0;
         beforeEach(function(done) {
             loadFeed(feedNum, function() {
